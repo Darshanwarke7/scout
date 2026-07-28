@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scout — AI Research Agent</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="top">
+      <div class="brand">
+        <span class="brand-mark">&gt;_</span>
+        <span class="brand-name">scout</span>
+      </div>
+      <nav class="top-links">
+        <button class="link-btn" data-view="research">research</button>
+        <button class="link-btn" data-view="knowledge">knowledge base</button>
+        <button class="link-btn" data-view="history">history</button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Ask it something. Watch it think.</h1>
+      <p class="hero-sub">
+        An agent that plans, calls tools, and reads its own documents —
+        every step visible, not hidden behind a spinner.
+      </p>
+
+      <form id="research-form" class="query-row">
+        <input
+          id="query-input"
+          type="text"
+          placeholder="e.g. How does the EU AI Act treat open-weight models?"
+          autocomplete="off"
+        />
+        <button type="submit" id="run-btn">run</button>
+      </form>
+
+      <div class="tool-badges">
+        <span class="badge badge-blue">web_search</span>
+        <span class="badge badge-lime">search_knowledge_base</span>
+        <span class="badge badge-blue">calculate</span>
+      </div>
+    </section>
+
+    <section id="view-research" class="view active">
+      <div class="panel-grid">
+
+        <div class="panel trace-panel">
+          <div class="panel-head">
+            <span class="panel-title">trace</span>
+            <span id="trace-status" class="status idle">idle</span>
+          </div>
+          <ol id="trace-list" class="trace-list">
+            <li class="trace-empty">Run a query above to see the agent's steps here.</li>
+          </ol>
+        </div>
+
+        <div class="panel report-panel">
+          <div class="panel-head">
+            <span class="panel-title">report</span>
+          </div>
+          <div id="report-body" class="report-body">
+            <p class="report-empty">The final answer will appear here once the agent finishes.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="view-knowledge" class="view">
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">upload documents</span>
+        </div>
+        <form id="upload-form" class="upload-row">
+          <input id="file-input" type="file" accept=".pdf,.txt,.md" />
+          <button type="submit">index</button>
+        </form>
+        <p id="upload-status" class="hint"></p>
+
+        <div class="panel-head" style="margin-top: 28px;">
+          <span class="panel-title">indexed so far</span>
+        </div>
+        <div id="kb-stats" class="kb-stats">loading…</div>
+      </div>
+    </section>
+
+    <section id="view-history" class="view">
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">past sessions</span>
+        </div>
+        <ul id="history-list" class="history-list">
+          <li class="hint">loading…</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>scout — a weekend-built research agent</span>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
