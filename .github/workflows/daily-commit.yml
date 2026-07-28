@@ -1,0 +1,31 @@
+﻿name: Daily Auto Commit
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update log file
+        run: |
+          mkdir -p .daily
+          echo "Auto update: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> .daily/log.md
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .daily/log.md
+          git diff --cached --quiet || git commit -m "chore: daily update $(date -u '+%Y-%m-%d')"
+          git push
